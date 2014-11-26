@@ -1,3 +1,5 @@
+Pomodoros = new Meteor.Collection("Pomodoros", {});
+
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault("counter", 0);
@@ -13,6 +15,25 @@ if (Meteor.isClient) {
       // increment the counter when button is clicked
       Session.set("counter", Session.get("counter") + 1);
     }
+  });
+
+  Template.pomodorosList.helpers({
+    allPomodoros: function () {
+      return Pomodoros.find({}, {sort: {startDate: -1}});
+    }
+  });
+
+  Template.pomodorosList.events({
+    'submit #new-pomodoro' : function (e) {
+      e.preventDefault();
+
+      var pomodoro = {
+        startDate: new Date(),
+        goal: $(e.target).find('[name=goal]').val(),
+      };
+
+      Pomodoros.insert(pomodoro);
+    },
   });
 }
 
