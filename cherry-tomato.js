@@ -34,6 +34,10 @@ if (Meteor.isClient) {
 
       Pomodoros.insert(pomodoro);
     },
+    'click .delete' : function (e) {
+      console.log(">>>>>>>> delete got clicked")
+      Pomodoros.remove(this._id);
+    }
   });
 }
 
