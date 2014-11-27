@@ -9,14 +9,15 @@ Template.pomodorosList.events({
     e.preventDefault();
 
     var pomodoro = {
+      userId: Meteor.userId(),
       startDate: new Date(),
-  goal: $(e.target).find('[name=goal]').val(),
+      goal: $(e.target).find('[name=goal]').val(),
     };
 
     Pomodoros.insert(pomodoro);
   },
   'click .delete' : function (e) {
     console.log(">>>>>>>> delete got clicked")
-  Pomodoros.remove(this._id);
+    Pomodoros.remove(this._id);
   }
 });
