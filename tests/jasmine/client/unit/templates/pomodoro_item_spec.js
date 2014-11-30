@@ -7,6 +7,7 @@ describe('Templates', function () {
         {startDate: new Date(), goal: "another goal"},
         this.container
       );
+
       var $view = $(this.container);
       expect($view).toContainText("another goal");
     });

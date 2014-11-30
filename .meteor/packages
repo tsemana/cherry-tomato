@@ -9,4 +9,5 @@ velocity:html-reporter
 accounts-password
 accounts-ui
 iron:router
+digilord:sugarjs
 
