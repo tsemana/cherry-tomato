@@ -1,7 +1,7 @@
 Template.pomodoroItem.helpers({
   formattedRemaining: function () {
     return formattedRemaining(this);
-  }
+  },
 });
 
 Template.pomodoroItem.events({

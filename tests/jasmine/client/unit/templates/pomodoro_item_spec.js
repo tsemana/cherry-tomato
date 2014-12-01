@@ -5,6 +5,7 @@ describe('Templates', function () {
         startDate: new Date(),
         goal: "another goal",
         done: function () { return false; },
+        remaining: function () { return 100000; }
       };
       this.container = document.createElement("DIV");
     });
@@ -31,6 +32,7 @@ describe('Templates', function () {
         startDate: start,
         goal: "another goal",
         done: function () { return true; },
+        remaining: function () { return "0:00"; }
       };
 
       this.view = Blaze.renderWithData(Template.pomodoroItem, pom, this.container);
@@ -50,6 +52,20 @@ describe('Templates', function () {
 
       var $view = $(this.container);
       expect($view).toContainElement('input.delete');
+    });
+
+    // Unit testing helpers in isolation
+    describe('helpers', function () {
+      describe('formattedRemaining', function () {
+        it('calls formattedRemaining', function () {
+          spyOn(window, 'formattedRemaining');
+
+          // this is how you call a helper
+          Template.pomodoroItem.__helpers[' formattedRemaining']();
+
+          expect(formattedRemaining).toHaveBeenCalled();
+        });
+      });
     });
   });
 });

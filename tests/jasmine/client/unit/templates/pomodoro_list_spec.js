@@ -14,14 +14,19 @@ describe('Templates', function () {
     describe('when a pomodoro exists', function () {
       it("shows the pomodoro", function() {
         spyOn(Template.pomodorosList.__helpers, " allPomodoros").and.callFake(function () {
-          return [{startDate: new Date(), goal: "new goal"}];
+          return [{
+            startDate:  new Date(),
+            goal:       "new goal",
+            done:       function () { return false; },
+            remaining:  function () { return 100000; },
+          }];
         });
 
         this.container = document.createElement("DIV");
         this.view = Blaze.renderWithData(Template.pomodorosList, {}, this.container);
         var $view = $(this.container).find(".pomodoro-list");
 
-        expect($view).toContainText("new goal");
+        expect($view.text()).toContain("new goal");
       });
     });
   });
